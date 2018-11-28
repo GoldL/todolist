@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-
+import TodoItem from './TodoItem'
 class TodoList extends Component {
   constructor(props) {
     super(props)
@@ -10,27 +10,40 @@ class TodoList extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
+    this.handleItemDel = this.handleItemDel.bind(this)
   }
 
   handleInputChange (e) {
-    this.setState({
-      inputValue: e.target.value
-    })
+    const inputValue = e.target.value
+    this.setState(() => ({
+      inputValue
+    }))
   }
 
   handleBtnClick () {
-    this.setState({
-      list: [...this.state.list, this.state.inputValue],
+    this.setState((prevState) => ({
+      list: [...prevState.list, prevState.inputValue],
       inputValue: ''
-    })
+    }))
   }
 
   handleItemDel (index) {
-    const list = [...this.state.list]
-    list.splice(index, 1)
+    this.setState((prevState) => {
+      const list = [...prevState.list]
+      list.splice(index, 1)
+      return { list }
+    })
+  }
 
-    this.setState({
-      list
+  getTodoItem () {
+    return this.state.list.map((item, index) => {
+      return (
+        <TodoItem
+          key={index}
+          content={item}
+          index={index}
+          handleItemDel={this.handleItemDel} />
+      )
     })
   }
 
@@ -43,13 +56,7 @@ class TodoList extends Component {
           <button onClick={this.handleBtnClick}>提交</button>
         </div>
         <ul>
-          {
-            this.state.list.map((item, index) => {
-              // return <li key={index} onClick={this.handleItemDel.bind(this, index)}>{item}</li>
-              return <li key={index} onClick={this.handleItemDel.bind(this, index)} dangerouslySetInnerHTML={{ __html: item }}></li>
-            })
-
-          }
+          {this.getTodoItem()}
         </ul>
       </Fragment>
     )
