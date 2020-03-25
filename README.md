@@ -8,4 +8,4 @@ todolist for react
 2. npm run start
 
 #### 笔记
-- 项目中的note.md
+- note.md

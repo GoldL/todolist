@@ -24,7 +24,7 @@ class TodoItem extends Component {
 
 // PropTypes 进行类型检查
 TodoItem.propTypes = {
-  content: PropTypes.arrayOf(PropTypes.string, PropTypes.number),
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   index: PropTypes.number
 }
 
