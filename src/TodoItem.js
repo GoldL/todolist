@@ -9,6 +9,11 @@ class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
+  // 提高性能
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.content !== this.props.content
+  }
+
   handleClick () {
     const { handleItemDel, index } = this.props
     handleItemDel(index)
