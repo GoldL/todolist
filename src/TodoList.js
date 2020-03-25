@@ -1,66 +1,35 @@
-import React, { Component, Fragment } from 'react'
-import TodoItem from './TodoItem'
+import React, { Component } from "react";
+import "antd/dist/antd.css";
+import { Input, Button, List } from "antd";
+const data = [
+  "Racing car sprays burning fuel into crowd.",
+  "Japanese princess to wed commoner.",
+  "Australian walks 100km after outback crash.",
+  "Man charged over missing wedding girl.",
+  "Los Angeles battles huge wildfires."
+];
 class TodoList extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      inputValue: '',
-      list: ['react', 'vue']
-    }
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleBtnClick = this.handleBtnClick.bind(this)
-    this.handleItemDel = this.handleItemDel.bind(this)
-  }
-
-  handleInputChange (e) {
-    const inputValue = e.target.value
-    this.setState(() => ({
-      inputValue
-    }))
-  }
-
-  handleBtnClick () {
-    this.setState((prevState) => ({
-      list: [...prevState.list, prevState.inputValue],
-      inputValue: ''
-    }))
-  }
-
-  handleItemDel (index) {
-    this.setState((prevState) => {
-      const list = [...prevState.list]
-      list.splice(index, 1)
-      return { list }
-    })
-  }
-
-  getTodoItem () {
-    return this.state.list.map((item, index) => {
-      return (
-        <TodoItem
-          key={index}
-          content={item}
-          index={index}
-          handleItemDel={this.handleItemDel} />
-      )
-    })
-  }
-
-  render () {
+  render() {
     return (
-      <Fragment>
+      <div style={{ margin: "10px" }}>
         <div>
-          <label htmlFor="input">请输入内容</label>
-          <input id="input" type="text" value={this.state.inputValue} onChange={this.handleInputChange} />
-          <button onClick={this.handleBtnClick}>提交</button>
+          <Input
+            placeholder="todo info"
+            style={{ width: "300px", marginRight: "10px" }}
+          />
+          <Button type="primary">提交</Button>
         </div>
-        <ul>
-          {this.getTodoItem()}
-        </ul>
-      </Fragment>
-    )
+        <List
+          style={{ width: "300px", marginTop: "10px" }}
+          header={<div>Header</div>}
+          footer={<div>Footer</div>}
+          bordered
+          dataSource={data}
+          renderItem={item => <List.Item>{item}</List.Item>}
+        />
+      </div>
+    );
   }
 }
 
-export default TodoList
+export default TodoList;
