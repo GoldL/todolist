@@ -1,6 +1,7 @@
 import React, {
   Component
 } from 'react'
+import PropTypes from 'prop-types'
 
 class TodoItem extends Component {
   constructor(props) {
@@ -19,6 +20,16 @@ class TodoItem extends Component {
       <div onClick={this.handleClick}>{content}</div>
     )
   }
+}
+
+// PropTypes 进行类型检查
+TodoItem.propTypes = {
+  content: PropTypes.arrayOf(PropTypes.string, PropTypes.number),
+  index: PropTypes.number
+}
+
+TodoItem.defaultProps = {
+  name: 'Ljd'
 }
 
 export default TodoItem
