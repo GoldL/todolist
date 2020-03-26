@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class TodoItem extends Component {
@@ -14,16 +12,14 @@ class TodoItem extends Component {
     return nextProps.content !== this.props.content
   }
 
-  handleClick () {
+  handleClick() {
     const { handleItemDel, index } = this.props
     handleItemDel(index)
   }
 
-  render () {
+  render() {
     const { content } = this.props
-    return (
-      <div onClick={this.handleClick}>{content}</div>
-    )
+    return <div onClick={this.handleClick}>{content}</div>
   }
 }
 
