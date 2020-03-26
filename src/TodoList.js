@@ -35,8 +35,8 @@ class TodoList extends React.Component {
           style={{ width: '300px', marginTop: '10px' }}
           bordered
           dataSource={list}
-          renderItem={item => (
-            <List.Item onClick={this.handleItemClick.bind(this)}>
+          renderItem={(item, index) => (
+            <List.Item onClick={this.handleItemClick.bind(this, index)}>
               {item}
             </List.Item>
           )}
